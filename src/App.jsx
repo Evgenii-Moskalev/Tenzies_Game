@@ -1,6 +1,7 @@
 import React from 'react'
 import './App.css'
 import Die from './assets/components/die'
+import { nanoid } from 'nanoid'
 
 function App() {
 
@@ -9,7 +10,11 @@ function App() {
   function allNewDice() {
     const newDice = []
     for (let i = 0; i < 10; i++) {
-      newDice.push(Math.ceil(Math.random() * 6))
+      newDice.push({
+        id: nanoid(),
+        value: Math.ceil(Math.random() * 6),
+        isHeld: false
+      })
     }
     return newDice
   }
@@ -18,13 +23,15 @@ function App() {
     setDice(allNewDice())
   }
 
-  const diceElements = dice.map(die => <Die value={die} />)
+  const diceElements = dice.map(die => (
+    <Die key={die.id} value={die.value} />
+  ))
 
   return (<main>
     <div className="dice-container">
       {diceElements}
     </div>
-      <button className="roll-dice" onClick={rollDice}>Roll</button>
+    <button className="roll-dice" onClick={rollDice}>Roll</button>
   </main>)
 }
 
