@@ -13,7 +13,7 @@ function App() {
       newDice.push({
         id: nanoid(),
         value: Math.ceil(Math.random() * 6),
-        isHeld: false
+        isHeld: true
       })
     }
     return newDice
@@ -24,7 +24,7 @@ function App() {
   }
 
   const diceElements = dice.map(die => (
-    <Die key={die.id} value={die.value} />
+    <Die key={die.id} value={die.value} isHeld={die.isHeld} />
   ))
 
   return (<main>
